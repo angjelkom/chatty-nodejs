@@ -2,7 +2,7 @@
  The Backend side of the Chatty Flutter App using GraphQL, Express and MongoDB
 
 
-This Project represents the Backend side of the [Chatty Flutter App](http://github.com/echonox/chatty-flutter) which uses technologies like **GraphQL Yoga**, **Express**, **MongoDB**, **bcryptJS** and **jsonwebtokens**
+This Project represents the Backend side of the [Chatty Flutter App](https://github.com/echonox/chatty-flutter) which uses technologies like **GraphQL Yoga**, **Express**, **MongoDB**, **bcryptJS** and **jsonwebtokens**
 
 ## Todos
 * [x] Login Flow
