@@ -1,0 +1,25 @@
+{
+  "name": "chatty-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Angjelko Miloshevski",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.7"
+  },
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "devDependencies": {
+    "ts-node": "^8.10.1",
+    "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "**/graphql-upload": "^10.0.0"
+  },
+  "JWT_SECRET": "YOUR_SECRET_HERE"
+}

@@ -1,0 +1,140 @@
+directive @isEmail on FIELD | FIELD_DEFINITION
+scalar Upload
+
+type Subscription {
+  data(id: ID!): SubscriptionPayload
+}
+
+type Query {
+  conversations: [Conversation]!
+  users: [User!]!
+  search(query: String!): [User]!
+  messages(id: ID!): [Message]!
+  profile: User!
+#  ads: [Ad!]!
+#  campaignAds: [Ad!]!
+#  profile: UserPayload
+#  pickAd: AdPayload
+}
+
+type Mutation {
+  signup(phoneNumber: String!, password: String!, name: String!): LoginPayload
+  login(phoneNumber: String!, password: String!): LoginPayload
+  saveProfile(phoneNumber: String, name: String, birthday: String, gender: String, profilePhoto: Upload): User
+  addConversation(users: [ID!]!): Conversation
+  sendMessage(content: String!, files: [ChattyFileUpload], conversation: ID!): Message
+  deleteMessage(id: ID!): ResponsePayload
+  deleteConversation(id: ID!): ResponsePayload
+  updateCounter: String
+  singleUpload (file: Upload!): File!
+#  createAdmin(email: String!, password: String!, name: String!): AuthPayload
+#  postAd(url: String!, price: Int!, duration: Int!, description: String, startAfterApprove: Boolean!): AdPayload
+#  updateAd(id: ID!, data: AdUpdateInput!): AdPayload
+#  watchAd(id: ID!): AdPayload
+#  deleteAd(id: ID!): UserPayload
+#  updateProfile(username: String, email: String): UserPayload
+}
+
+type User {
+  _id: ID!
+  name: String!
+  phoneNumber: String!
+  confirmed: Boolean!
+  #email: String! @isEmail
+  birthday: String
+  gender: String
+  password: String!
+  friends: [User]!
+  conversations: [Conversation]!
+  createdAt: Float!
+  modifiedAt: Float!
+  isPrivate: Boolean!
+  profilePhoto: String
+}
+
+
+type Conversation {
+  _id: ID!
+  messages: [Message]!
+  users: [User!]!
+  createdAt: Float!
+  modifiedAt: Float!
+  lastMessage: Message
+}
+
+type Message {
+  _id: ID!
+  content: String!
+  files: [ChattyFile!]
+  sender: User!
+  createdAt: Float!
+  modifiedAt: Float! 
+  isLoggedUser: Boolean!
+}
+
+input ChattyFileUpload {
+  file: Upload!
+  thumbnail: Upload!
+}
+
+type ChattyFile {
+  file: String!
+  thumbnail: String
+}
+
+type AuthPayload {
+  user: User
+  token: String
+  error: String
+}
+
+type LoginPayload {
+  userId: String
+  token: String
+  error: String
+}
+
+# input AdUpdateInput {
+#   url: String
+#   price: Int
+#   totalPrice: Int
+#   duration: Int
+#   description: String
+#   startAfterApprove: Boolean
+#   isRunning: Boolean
+# }
+
+# type MessagePayload {
+#   message: String!
+# }
+
+# type AdPayload {
+#   ad: Ad,
+#   message: String
+#   error: String
+# }
+
+# type UserPayload {
+#   user: User,
+#   message: String
+#   error: String
+# }
+
+type ResponsePayload {
+  error: String
+  success: String
+}
+
+type SubscriptionPayload {
+  conversation: Conversation
+  message: Message
+  update: Boolean!
+}
+
+type File {
+  id: ID!
+  path: String!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+}
